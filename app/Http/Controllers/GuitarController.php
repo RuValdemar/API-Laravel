@@ -16,7 +16,7 @@ class GuitarController extends Controller
      */
     public function index(Request $request){
 
-       $guitars = Guitar::all()->load('brand')->load('user');
+        $guitars = Guitar::all()->load('brand')->load('user');
         return response()->json(array(
             'guitars' => $guitars,
             'status' => 'success'
@@ -175,19 +175,15 @@ class GuitarController extends Controller
                 return response()->json($validate->errors(), 400);
             }
 
-            // Actualizar el coche
+            // Quitar las variables que no quiere actualizar
 
             unset($params_array['id']);
-            unset($params_array['user_id']);
-            unset($params_array['brand_id']);
-            unset($params_array['model']);
-            unset($params_array['type']);
-            unset($params_array['cords']);
-            unset($params_array['price']);
-            unset($params_array['description']);
+            unset($params_array['user_id']); 
             unset($params_array['created_at']);
             unset($params_array['user']);
+            unset($params_array['brand']);
 
+            // Actualizar el coche
             $guitar = Guitar::where('id', $id)->update($params_array);          
 
             // Devolver una respuesta            

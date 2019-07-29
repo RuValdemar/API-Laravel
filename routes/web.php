@@ -15,19 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/api/register', 'UserController@register');
-Route::post('/api/login', 'UserController@login');
+/*Route::post('/api/register', 'UserController@register');
+Route::post('/api/login', 'UserController@login');*/
 
-/*Route::post('/api/register', ['middleware' => 'cabeceras',
+Route::post('/api/register', ['middleware' => 'cabeceras',
                               'uses' => 'UserController@register']);
 
 Route::post('/api/login', ['middleware' => 'cabeceras',
-                           'uses' => 'UserController@login']);*/
+                           'uses' => 'UserController@login']);
 
-//Route::group(['middleware' => 'cabeceras'], function() {
+Route::group(['middleware' => 'cabeceras'], function() {
     Route::resource('/api/guitars', 'GuitarController');
-//});
+});
 
-//Route::group(['middleware' => 'cabeceras'], function() {
+Route::group(['middleware' => 'cabeceras'], function() {
     Route::resource('/api/brands', 'BrandController');
-//});
+});
